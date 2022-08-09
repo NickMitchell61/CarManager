@@ -12,6 +12,7 @@ public class Motorcycle {
 	String engineType;
 	boolean isReadyToDrive;
 	private int distance = 0;
+	protected int distanceOnService = 0;
 	
 	public Motorcycle(String name, int yearOfProduction, int price, int weight, String color, String engineType, boolean isReadyToDrive) {
 		this.name = name;
@@ -25,32 +26,41 @@ public class Motorcycle {
 	
 	
 	public void addDistance(int additionatDistance) {
-		try {
-			if (additionatDistance < 0) {
-				
-			} else {
-				distance += additionatDistance;
-			}
+		if (additionatDistance < 0) {
 			
-		} catch (Exception e) {
-			System.out.println("Distance is only above than 0");
+		} else {
+			distance += additionatDistance;
+			distanceOnService += additionatDistance;
 		}
 	}
 	
 	
 	public void addDistance(double additionatDistance) {
-		try {
-			if (additionatDistance < 0) {
+		if (additionatDistance < 0) {
 				
-			} else {
-				distance += Math.round(additionatDistance);
-			}
-			
-		} catch (Exception e) {
-			System.out.println("Distance is only above than 0");
+		} else {
+			distance += Math.round(additionatDistance);
+			distanceOnService += Math.round(additionatDistance);
 		}
 	}
 	
+	public void service() {
+		distanceOnService = 0;
+	}
+	
+	public int getDistanceOnService() {
+		return distanceOnService;
+	}
+
+	
+	public boolean isReadyToService() {
+		if(distanceOnService >= 10000) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	
 	public boolean repair() {
 		if (isReadyToDrive == false) {
@@ -77,7 +87,7 @@ public class Motorcycle {
 	public String toString() {
 		return "Motorcycle [name=" + name + ", yearOfProduction=" + yearOfProduction + ", price=" + price + ", weight="
 				+ weight + ", color=" + color + ", engineType=" + engineType + ", isReadyToDrive=" + isReadyToDrive
-				+ ", distance=" + distance + "]";
+				+ ", distance=" + distance + ", distanceOnService=" + distanceOnService + "]";
 	}
 
 
