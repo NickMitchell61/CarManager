@@ -2,7 +2,7 @@ package ua.com.foxminded.carmanager;
 
 import java.util.Objects;
 
-public class Motorcycle {
+public abstract class Motorcycle implements Serviceable {
 	
 	String name;
 	int yearOfProduction;
@@ -39,10 +39,10 @@ public class Motorcycle {
 		if (additionatDistance < 0) {
 				
 		} else {
-			distance += Math.round(additionatDistance);
-			distanceOnService += Math.round(additionatDistance);
+			this.addDistance(Math.round(additionatDistance));
 		}
 	}
+	
 	
 	public void service() {
 		distanceOnService = 0;
@@ -53,13 +53,7 @@ public class Motorcycle {
 	}
 
 	
-	public boolean isReadyToService() {
-		if(distanceOnService >= 10000) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+	public abstract boolean isReadyToService();
 
 	
 	public boolean repair() {
